@@ -23,7 +23,7 @@ The default settings of these can be found in `VRisingServer_Data/StreamingAsset
 After the server has loaded the default files it looks for local overrides. The default location it looks for these files are:
 * Windows: `%USERPROFILE%\AppData\LocalLow\Stunlock Studios\VRisingServer\Settings`
 
-You can put a full settings file in this local override location, or you can populate it with just the settings/values that differ from the default file. This location can be customized with the `-persistentDataPath` parameter, which is recommended to do in general and a must if you want to run multiple servers on one host to keep the settings and saves separated.
+You can put a full settings file in this local override location, or you can populate it with just the settings/values that differ from the default file. This location can be customized with the `-persistentDataPath` parameter, which is recommended to do in general and a must if you want to run multiple servers on one host to keep the settings and saves separated. ⚠️ **With multiple server setups**, the settings' files must be located inside a subfolder named `Settings`, itself inside the specified `-persistentDataPath` folder. 
 
 The most important settings in the `ServerHostSettings.json` file are the following:
 
