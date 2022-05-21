@@ -23,7 +23,14 @@ The default settings of these can be found in `VRisingServer_Data/StreamingAsset
 After the server has loaded the default files it looks for local overrides. The default location it looks for these files are:
 * Windows: `%USERPROFILE%\AppData\LocalLow\Stunlock Studios\VRisingServer\Settings`
 
-You can put a full settings file in this local override location, or you can populate it with just the settings/values that differ from the default file. This location can be customized with the `-persistentDataPath` parameter, which is recommended to do in general and a must if you want to run multiple servers on one host to keep the settings and saves separated. ⚠️ **With multiple server setups**, the settings' files must be located inside a subfolder named `Settings`, itself inside the specified `-persistentDataPath` folder. 
+You can put a full settings file in this local override location, or you can populate it with just the settings/values that differ from the default file.
+
+This location can be customized with the `-persistentDataPath` parameter, which is recommended to do in general and a must if you want to run multiple servers on one host to keep the settings and saves separated.
+
+**NOTE**: The path that is replaced with `-persistentDataPath` is what the [`Application.persistentDataPath`](https://docs.unity3d.com/ScriptReference/Application-persistentDataPath.html) constant in [Unity](https://unity.com/) is referring to, which is:
+* Windows: `%USERPROFILE%\AppData\LocalLow\Stunlock Studios\VRisingServer\`
+
+That means that anything that would have gone inside the path above, like `Settings` and `Saves` goes below/inside whatever folder specified with `-persistentDataPath`. So settings files are read from the `Settings` subfolder and saves are put in the `Saves` subfolder within the specified path.
 
 The most important settings in the `ServerHostSettings.json` file are the following:
 
@@ -66,7 +73,7 @@ If you ban users through the in-game console the server will automatically modif
 The default location for save files are:
 * Windows: `%USERPROFILE%\AppData\LocalLow\Stunlock Studios\VRisingServer\Saves`
 
-However, just like with the settings, this can be overridden with the `-persistentDataPath` parameter.
+However, just like with the settings, this can be overridden with the `-persistentDataPath` parameter. As explained above, the saves will put in the `Saves` subfolder of whatever path is specificed by `-persistentDataPath`.
 
 ## Backups
 It is highly recommended to backup the save files often and before patching or before starting the server after having patched.
