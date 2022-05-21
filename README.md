@@ -52,6 +52,8 @@ Some settings can be overwritten by command line parameters. Below is a list of 
 | -maxConnectedUsers | number | 10 | Max number of concurrent players on server |
 | -maxConnectedAdmins | number | 4 | Max number of admins to allow connect even when server is full |
 | -address | string | "127.0.0.1" | Bind to a specific IP address |
+| -gamePort | number | 27015 | UDP port for game traffic |
+| -queryPort | number | 27016 | UDP port for Steam server list features |
 
 If you want others to connect to your server, make sure you allow the program through the firewall. You might also need to forward ports on your router. To do this, please follow your manufacturer's instructions for your particular router.
 If you want your server to show up on the server list you need to make sure that both the specified queryPort and gamePort is open in your firewall and forwarded on your router, otherwise just opening/forwarding the gamePort will be enough.
