@@ -79,3 +79,26 @@ However, just like with the settings, this can be overridden with the `-persiste
 It is highly recommended to backup the save files often and before patching or before starting the server after having patched.
 
 The current auto save settings allows you to set save interval and save count. So with the same amount of disk space you either save often but maybe not have that many save files (not so far back in time), or save less often (longer rollback in-case of crash) and have more save files, or high number of on both and consume more disk space. So, again, regularly backing up you save files is highly recommended in case your game state becomes corrupted.
+
+ # RCON
+Altough currently with limited functionality, you can configure the server to listen to RCON connections. If you are not familiar with RCON you can read more about it here: https://developer.valvesoftware.com/wiki/Source_RCON_Protocol.
+
+To enable RCON, add the following to the server host settings file (located at `%USERPROFILE%\AppData\LocalLow\Stunlock Studios\VRisingServer\ServerHostSettings.json` on windows):
+```
+"Rcon": {
+  "Enabled": true,
+  "Password": "somepassword",
+  "Port": 25575
+}
+```
+
+Note that a password must be configured, this cannot be left empty. Port can be changed to any valid TCP port.
+  
+These are the currently available commands:
+
+| Command | Parameter | Comment |
+|------|:-------------:|:------|
+| announce | string | Sends a message to all players connected to the server. |
+| announcerestart | number | Sends a pre-configured message that announces server restart in x minutes to all players connected to the server. Less flexible than announce but has the benefit of being localized to each users language. |
+
+To connect to the server you need an RCON client. There are multiple available, one known to work with V Rising is https://github.com/Tiiffi/mcrcon.
