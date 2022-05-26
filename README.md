@@ -80,6 +80,36 @@ It is highly recommended to backup the save files often and before patching or b
 
 The current auto save settings allows you to set save interval and save count. So with the same amount of disk space you either save often but maybe not have that many save files (not so far back in time), or save less often (longer rollback in-case of crash) and have more save files, or high number of on both and consume more disk space. So, again, regularly backing up you save files is highly recommended in case your game state becomes corrupted.
 
+## Transfer local/client save to a Dedicated Server
+The default location for save files, hosted via the game client, are:
+* Windows: `%USERPROFILE%\AppData\LocalLow\Stunlock Studios\VRising\Saves`
+
+In this folder there should currently only be one `v1` (at this time) folder, which represents the current `Persistence Version`. If in the future there are breaking changes to the persistence/save format, there could be `v2`, `v3`, et cetera.
+
+Inside this (currently `v1`) folder lies the actual save folders for the local saves/sessions. Since the user does not name these session/save folders when starting/hosting a game via the game client, these folder names are random, in the GUID format. For example: `db4b1c0e-2b7d-430a-87ef-4b6c09398dcf`
+
+Full path example:
+```
+%USERPROFILE%\AppData\LocalLow\Stunlock Studios\VRising\Saves\v1\db4b1c0e-2b7d-430a-87ef-4b6c09398dcf
+
+AutoSave_0
+AutoSave_1
+AutoSave_2
+ServerGameSettings.json
+ServerHostSettings.json
+SessionId.json
+```
+
+To find the specific session you want to move, you can check the `ServerHostSettings.json` file inside each folder to see the session name that you specified in-game.
+
+When you have located the session you want to transfer to a dedicated server it is recommended to backup the full folder in case something goes wrong with the transfer on first try, so you allways have the original still.
+
+Now when you have backed up the original, you can do a bit of cleaning up in this folder. If you have already set up your server with name, max players, password, et cetera, or supply them on the command line, then you can remove the `ServerHostSettings.json`. You can also remove all except the last `AutoSave_#` folder, since that is the one that will be loaded, but transferring them all is fine too. Rename the "GUID folder" to something simpler if you want to, then transfer it to the `.../Saves/v1/` folder on your server.
+
+Configure the server to load the transferred save with the `-saveName <name>` command line parameter. Specify the moved folder as the save name to use. Also make sure to set `GameSettingsPreset` to be empty, so it does not load some other preset instead of the settings you have copied. Make sure to not have a modified `ServerGameSettings.json` in the default settings folder (should not be modified, as mentioned above) or any override `ServerGameSettings.json` in the local override folder, to achieve the same end result of game settings as they were when hosted via the client.
+
+Lastly, it is recommended to remove the files moved/copied to the server from their original client location, so the same save/session does not show up twice when you have played on the server save.
+
  # RCON
 Altough currently with limited functionality, you can configure the server to listen to RCON connections. If you are not familiar with RCON you can read more about it here: https://developer.valvesoftware.com/wiki/Source_RCON_Protocol.
 
