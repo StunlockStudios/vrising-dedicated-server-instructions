@@ -32,39 +32,170 @@ This location can be customized with the `-persistentDataPath` parameter, which 
 
 That means that anything that would have gone inside the path above, like `Settings` and `Saves` goes below/inside whatever folder specified with `-persistentDataPath`. So settings files are read from the `Settings` subfolder and saves are put in the `Saves` subfolder within the specified path.
 
-The most important settings in the `ServerHostSettings.json` file are the following:
+## Server Host Settings
+Below you can find the settings in `ServerHostSettings.json`.
 
-| Setting | Value Type | Example Value | Comment |
-|----------|:-------------:|:------:|---|
-| Name | string | "My V Rising Server" | Name of server |
-| Description | string | "This is a role playing server" | Short description of server purpose, rules, message of the day |
-| Port | number | 27015 | UDP port for game traffic |
-| QueryPort | number | 27016 | UDP port for Steam server list features |
-| MaxConnectedUsers | number | 10 | Max number of concurrent players on server |
-| MaxConnectedAdmins | number | 4 | Max number of admins to allow connect even when server is full |
-| SaveName | string | "world1" | Name of save file/directory |
-| Password | string | "SuperSecret" | Set a password or leave empty |
-| ListOnMasterServer | boolean | true | Set to true to list on server list, else set to false |
-| AutoSaveCount | number | 40 | Number of autosaves to keep |
-| AutoSaveInterval | number | 120 | Interval in seconds between each auto save |
-| GameSettingsPreset | string | "StandardPvP" | Name of a GameSettings preset found in the GameSettingPresets folder |
+The `Setting: KeyWord` refers to the name/key in the JSON file.
 
-Some settings can be overwritten by command line parameters. Below is a list of some of the parameters that can be used.
+Each setting can be overridden via an Environment Variable (System, User, Process) or Command Line Parameter, in this order (if multiple were to be used/stacked). In the `Overrides` list, the environment variables are written in upper case like `VR_EXAMPLE=<value>`, and the command line parameters are written as `-commandLineExample <value>`.
 
-| Parameter | Value Type | Example Value | Comment |
-|----------|:-------------:|:------:|---|
-| -saveName | string | "world1" | Name of save file/directory |
-| -serverName | string | "My V Rising Server" | Name of server in server list |
-| -persistentDataPath | string | ".\save-data" | Absolute or relative path to where Settings and Save files are held |
-| -maxConnectedUsers | number | 10 | Max number of concurrent players on server |
-| -maxConnectedAdmins | number | 4 | Max number of admins to allow connect even when server is full |
-| -address | string | "127.0.0.1" | Bind to a specific IP address |
-| -gamePort | number | 27015 | UDP port for game traffic |
-| -queryPort | number | 27016 | UDP port for Steam server list features |
+Setting: `Name`  
+Description: Name of the server. The name that shows up in server list.  
+Type: `text`  
+Example value: `"My V Rising Server"`  
+Overrides: `VR_NAME=<name>`, `VR_SERVER_NAME=<name>`, `-serverName <name>`  
 
+---
+
+Setting: `Description`  
+Description: Short server description. Shows up in details panel of server list when entry is selected. Also printed in chat when connecting to server.  
+Type: `text`  
+Example value: `"Role playing server. Reset every Monday. Be nice."`  
+Overrides: `VR_DESCRIPTION=<description>`, `-description <description>`  
+
+---
+
+Setting: `Port`  
+Description: UDP port for game traffic.  
+Type: `number`  
+Example value: `27015`  
+Overrides: `VR_GAME_PORT=<port>`, `-serverPort <port>` (deprecated), `-gamePort <port>`  
+
+---
+
+Setting: `QueryPort`  
+Description: UDP port for Steam server list features.  
+Type: `number`  
+Example value: `27016`  
+Overrides: `VR_QUERY_PORT=<port>`, `-queryPort <port>`  
+
+---
+
+Setting: `Address`  
+Description: Bind to a specific IP address.  
+Type: `text`  
+Example value: `10.20.0.3`  
+Overrides: `VR_ADDRESS=<address>`, `VR_BIND_ADDRESS=<address>`, `-address <address>`, `-bindAddress <address>`  
+
+---
+
+Setting: `MaxConnectedUsers`  
+Description: Max number of concurrent players on server.  
+Type: `number`  
+Example value: `40`  
+Overrides: `VR_MAX_USERS=<number>`, `-maxConnectedUsers <number>` (deprecated), `-maxUsers <number>`  
+
+---
+
+Setting: `MaxConnectedAdmins`  
+Description: Max number of admins to allow connect even when server is full.  
+Type: `number`  
+Example value: `4`  
+Overrides: `VR_MAX_ADMINS=<number>`, `-maxConnectedAdmins <number>` (deprecated), `-maxAdmins <number>`  
+
+---
+
+Setting: `ServerFps`  
+Description: Target FPS for server.  
+Type: `number`  
+Example value: `30`  
+Overrides: `VR_FPS=<fps>`, `VR_TARGET_FPS=<fps>`, `-fps <fps>`, `-targetFps <fps>`, `-serverFps <fps>`  
+
+---
+
+Setting: `Password`  
+Description: Set a password or leave empty.  
+Type: `text`  
+Example value: `SuperSecret`  
+Overrides: `VR_PASSWORD=<password>`, `-password "<password>"`  
+
+---
+
+Setting: `Secure`  
+Description: Enable VAC protection on server. VAC banned clients will not be able to connect.  
+Type: `boolean`  
+Example value: `true`, `false`  
+Overrides: `VR_SECURE=<value>`, `-secure <value>`, `-enableSecure`, `-disableSecure`  
+
+---
+
+Setting: `ListOnMasterServer`  
+Description: Register on list server or not.  
+Type: `boolean`  
+Example value: `true`, `false`  
+Overrides: `VR_LIST_ON_MASTER_SERVER=<value>`, `-listing <value>`, `-enableListing`, `-disableListing`
+
+---
+
+Setting: `GameSettingsPreset`  
+Description: Load a ServerGameSettings preset.  
+Type: `text`  
+Example value: `StandardPvP`  
+Overrides: `VR_PRESET=<preset>`, `-preset <preset>`  
+
+---
+
+Setting: `SaveName`  
+Description: Name of save file/directory. Must be a valid directory name.  
+Type: `text`  
+Example value: `world23`  
+Overrides: `VR_SAVE_NAME=<name>`, `-serverSaveName <name>` (deprecated), `-saveName <name>`  
+
+---
+
+Setting: `AutoSaveCount`  
+Description: Number of autosaves to keep.  
+Type: `number`  
+Example value: `20`  
+Overrides: `VR_SAVE_COUNT=<number>`, `-saveCount <number>`
+
+---
+
+Setting: `AutoSaveInterval`  
+Description: Interval in seconds between each auto save.  
+Type: `number`  
+Example value: `120`  
+Overrides: `VR_SAVE_INTERVAL=<number>`, `-saveInterval <number>`  
+
+---
+
+Setting: `LanMode`  
+Description: Enable LAN mode.  
+Type: `boolean`  
+Example value: `true`, `false`  
+Overrides: `VR_LAN_MODE=<value>`, `-lanMode <value>`, `-lan`, `-enableLanMode`, `-disableLanMode`  
+
+---
+
+### Rcon
+
+Setting: `Enabled`  
+Description: Enable or disable Rcon functionality.  
+Type: `boolean`  
+Example value: `true`, `false`  
+Overrides: `VR_RCON_ENABLED=<value>`, `-rconEnabled <value>`, `-enableRcon`, `-disableRcon`  
+
+---
+
+Setting: `Port`  
+Description: Rcon TCP port.  
+Type: `number`  
+Example value: `25575`  
+Overrides: `VR_RCON_PORT=<port>`, `-rconPort <port>`  
+
+---
+
+Setting: `Password`  
+Description: Password to access RCON.  
+Type: `text`  
+Example value: `ExtraSecretPassword`  
+Overrides: `VR_RCON_PASSWORD="<password>"`, `-rconPassword "<password>"`
+
+## Firewall / Port Forwarding
 If you want others to connect to your server, make sure you allow the program through the firewall. You might also need to forward ports on your router. To do this, please follow your manufacturer's instructions for your particular router.
 If you want your server to show up on the server list you need to make sure that both the specified queryPort and gamePort is open in your firewall and forwarded on your router, otherwise just opening/forwarding the gamePort will be enough.
 
+## Server Administration
 To become an administrator in the game you will first need to modify the `adminlist.txt` file under `VRisingServer_Data/StreamingAssets/Settings/` with your steamId (one steamId per line). This can be done without restarting your server. To become an administrator in the game you need to enable the console in the options menu, bring it down with `~` and authenticate using the `adminauth` console command. Once an administrator you can use a number of administrative commands like `banuser`, `bancharacter`, `banned`, `unban` and `kick`.
 
 If you ban users through the in-game console the server will automatically modify the `banlist.txt` located under `VRisingServer_Data/StreamingAssets/Settings/` but you can also modify this manually (one steamId per line).
@@ -114,7 +245,7 @@ Lastly, it is recommended to remove the files moved/copied to the server from th
 Altough currently with limited functionality, you can configure the server to listen to RCON connections. If you are not familiar with RCON you can read more about it here: https://developer.valvesoftware.com/wiki/Source_RCON_Protocol.
 
 To enable RCON, add the following to the server host settings file (located at `%USERPROFILE%\AppData\LocalLow\Stunlock Studios\VRisingServer\ServerHostSettings.json` on windows):
-```
+```json
 "Rcon": {
   "Enabled": true,
   "Password": "somepassword",
