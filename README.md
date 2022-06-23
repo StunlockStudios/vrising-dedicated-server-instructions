@@ -191,6 +191,14 @@ Type: `text`
 Example value: `ExtraSecretPassword`  
 Overrides: `VR_RCON_PASSWORD="<password>"`, `-rconPassword "<password>"`
 
+---
+
+Setting: `BindAddress`  
+Description: Binds RCON socket to specified address. Will override the "global" `Address` setting, if you want to bind to a separate internal interface for instance.  
+Type: `text`  
+Example value: `10.22.0.8`  
+Overrides: `VR_RCON_BIND_ADDRESS="<address>"`, `-rconBindAddress "<address>"`
+
 ## Firewall / Port Forwarding
 If you want others to connect to your server, make sure you allow the program through the firewall. You might also need to forward ports on your router. To do this, please follow your manufacturer's instructions for your particular router.
 If you want your server to show up on the server list you need to make sure that both the specified queryPort and gamePort is open in your firewall and forwarded on your router, otherwise just opening/forwarding the gamePort will be enough.
