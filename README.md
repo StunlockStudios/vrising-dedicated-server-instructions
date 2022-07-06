@@ -167,6 +167,22 @@ Overrides: `VR_LAN_MODE=<value>`, `-lanMode <value>`, `-lan`, `-enableLanMode`, 
 
 ---
 
+Setting: `ResetDaysInterval`  
+Description: Days between scheduled resets/wipes. When the server starts, and is about to load a save file, it checks if it is time to reset and start a new save file. The previous save file is backed up. Defaults to `0`, which means the feature is disabled.  
+Type: `number`  
+Example values: `0`, `7`, `14`, `37`  
+Overrides: `VR_RESET_DAYS_INTERVAL=<value>`, `-resetDaysInterval <value>`  
+
+---
+
+Setting: `DayOfReset`  
+Description: If you want the server to reset on Saturdays, every two weeks, but it is not Saturday when you initially set up you server then you can set `ResetDaysInterval` to `14` and then set this to `Saturday`. It will check that at least `ResetDaysInterval` days has passed and that it is the day of `DayOfReset`. If you do not want to restrict reset to a specific day, but just rely on the value of `ResetDaysInterval`, then set this to `Any`, which is also the default.  
+Type: `enum`  
+Possible values: `Any`, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`  
+Overrides: `VR_DAY_OF_RESET=<value>`, `-dayOfReset <value>`  
+
+---
+
 ### Rcon
 
 Setting: `Enabled`  
