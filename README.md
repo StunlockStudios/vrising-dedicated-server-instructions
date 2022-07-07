@@ -287,3 +287,34 @@ These are the currently available commands:
 | announcerestart | number | Sends a pre-configured message that announces server restart in x minutes to all players connected to the server. Less flexible than announce but has the benefit of being localized to each users language. |
 
 To connect to the server you need an RCON client. There are multiple available, one known to work with V Rising is https://github.com/Tiiffi/mcrcon.
+
+#Admin commands
+
+adminauth - Authenticate to gain administrator privileges
+admindeauth - Relinquish your administrator privileges, if you have any
+addtime <1-12> - Adds up to 12 in game hours to the current game time 
+adminonlydebugevent - Set if debug events are limited to only admins
+bancharacter <name> - Bans the user playing with the specified character name form the server
+banned - List all banned players
+banuser <Steam ID> - Bans the user with the specified steam ID from the server
+changedurability (Amount, EquipmentType) - Do a durability change on equipped items
+changehealthofclosesttomouse - Changes health by generating an actual HealthChangeEvent instead of a regular set
+DebugViewEnabled - Enable or disable the debug view
+GatherAllAllies - Teleports all allies to mouse cursor position
+GatherAllAlliesExceptMe - Teleports all allies, except you, to mouse cursor position
+GatherAllNonAllies - Teleports all non allies to mouse cursor position
+GatherAllPlayers - Teleports all players to mouse cursor position
+GatherAllPlayersExceptMe - Teleports all players, except you, to mouse cursor position
+give (What, Amount) - Gives you the specified item in the specified amount	
+giveset <setname> - Gives you the specified gear set
+kick <Name> - Kicks a player from the server
+listusers - List users that are active on the server (include disconnected players)
+PlayerTeleport - Teleports you to your mouse cursor
+setadminlevel <player name> <admin type> - Set or change the Admin level of a user (None, Moderator, Admin, Superadmin)
+teleport (Who, Where, WorldPosX, WorldPosY) - Teleport something to a somewhere
+TeleportPlayerToMe (User) - Teleport a player to your location
+TeleportToChunk (Unnamed Argument) - Teleport player to chunk coordinate
+TeleportToChunckWaypoint (Unnamed Argument) - Teleport to Chunck Waypoint
+TeleportToNether - Teleports you to Nether (the first place you start from right after you create a character on the server)
+TeleportToPlayer (User) - Teleport to Player location
+toggleobserve (mode) - Toggle being observer (0 = turn off, 1 = Completely invisible, 2 = Ghost mode - you can go through walls)
