@@ -1,15 +1,68 @@
-# V Rising Dedicated Server Instructions
-The V Rising Dedicated Server is as it sounds a dedicated server application for the game [V Rising](https://store.steampowered.com/app/1604030/V_Rising/).
 
-# Download
-The V Rising Dedicated Server application can be downloaded from Steam, and is freely available to everyone. It can be found in the Tools section of your library. At the moment there is only a Windows version of the server available. Hopefully we can provide the Linux version soon.
+- [V Rising Dedicated Server](#v-rising-dedicated-server)
+- [Required System Specifications](#required-system-specifications)
+  - [Small Server Instance (~10 users)](#small-server-instance-10-users)
+- [Supported Platforms](#supported-platforms)
+- [Installation](#installation)
+  - [Installation through Steam](#installation-through-steam)
+  - [Installation through SteamCMD](#installation-through-steamcmd)
+  - [Installation and Update with SteamPS](#installation-and-update-with-steamps)
+    - [Process](#process)
+    - [Process to update the game using SteamPS](#process-to-update-the-game-using-steamps)
+- [Running the Server](#running-the-server)
+- [Configuring the Server](#configuring-the-server)
+- [Save Files](#save-files)
+  - [Backups](#backups)
+- [RCON](#rcon)
 
+# V Rising Dedicated Server
+The V Rising Dedicated Server is a dedicated server application for the game [V Rising](https://store.steampowered.com/app/1604030/V_Rising/).
+
+# Required System Specifications
+## Small Server Instance (~10 users)
+* 6GB of RAM
+* 2 CPU Cores 
+
+# Supported Platforms
+* Windows
+* Linux / Docker are not supported at this time
+  * Hopefully a Linux version will come out soon!
+
+# Installation
+
+## Installation through Steam
+The V Rising Dedicated Server application can be downloaded from Steam, and is freely available to everyone. It can be found in the Tools section of your library named "`V Rising Dedicated Server`"
+
+## Installation through SteamCMD
 If you are using [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD) to download and run the server, the Steam AppID for the V Rising Dedicated Server is `1829350`. This is used for downloading the server, but when running it, it will use the same Steam AppID as the client, which is defined in the `steam_appid.txt` file supplied with the download.
+
+## Installation and Update with SteamPS
+You can also use a wrapper for SteamCMD called [SteamPS] (https://github.com/hjorslev/SteamPS) which will manage the installation and update of the server assets.
+
+### Process
+* Click on `Start`
+* Type `cmd` and press enter
+* Issue the command `powershell`
+* Run the following commands to install the module, then install the game into `C:\servers\v_rising` you may change this directory to your preferance.
+    ```powershell
+    Install-Module -Name SteamPS
+    Install-SteamCMD
+    Update-SteamApp -ApplicationName 'V Rising Dedicated Server' -Path 'C:\servers\v_rising'
+    ```
+    **NOTE:** Any questions should be answered with yes
+
+### Process to update the game using SteamPS
+* Click on `Start`
+* Type `cmd` and press enter
+* Issue the command `powershell`
+* Run the following command `Update-SteamApp -ApplicationName 'V Rising Dedicated Server' -Path 'C:\servers\v_rising'` to update the game in `C:\servers\v_rising` you may change this directory to your currently installed dedicated game server path.  
+**NOTE:** Any questions should be answered with yes
 
 # Running the Server
 In its simplest form you could just execute VRisingServer.exe to start the server. This will start the server with all default settings, which is probably not what you want.
 
-There is an example batch script (`start_server_example.bat`) in the installation folder next to the executable file. It is recommended that you make a copy of this file and modify it to your liking. If you change the supplied example file it might be overwritten when the software is updated.
+There is an example batch script (`start_server_example.bat`) in the installation folder with the executable file. It is recommended that you make a copy of this file and modify it to your liking. (IE: `start_server.bat`)  
+**NOTE:** If you change the supplied example file (`start_server_example.bat`) it might be overwritten when the software is updated!
 
 # Configuring the Server
 There are two main settings files that the server is using.
