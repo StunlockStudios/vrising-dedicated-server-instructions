@@ -196,7 +196,7 @@ Overrides: `VR_SAVE_NAME=<name>`, `-serverSaveName <name>` (deprecated), `-saveN
 ---
 
 Setting: `AutoSaveCount`  
-Description: Number of autosaves to keep.  
+Description: Total number of Auto Saves to keep.  
 Type: `number`  
 Example value: `20`  
 Overrides: `VR_SAVE_COUNT=<number>`, `-saveCount <number>`
@@ -212,10 +212,12 @@ Overrides: `VR_SAVE_INTERVAL=<number>`, `-saveInterval <number>`
 ---
 
 Setting: `AutoSaveSmartKeep`  
-Description: .  
+Description: Decides which saves to keep over time, in a "smarter" way than just the last `AutoSaveCount` number.  
 Type: `string`  
-Example value: `10:1:1,30:0:1,60:0:1,120:0:1,180:0:1,240:0:1,360:0:1,720:0:1,1440:0:1,2880:0:1,43200:99:0`  
+Example value: `10:1:1,30:0:1,60:0:1,120:0:1,180:0:1,240:0:1,360:0:1,720:0:1,1440:0:1,2880:0:1,52560000:99:0`  
 Overrides: `VR_AUTOSAVESMARTKEEP=<string>`, `-saveSmartKeep <string>`  
+
+See the [AutoSaveSmartKeep and AutoSaveCount Settings](#autosavesmartkeep-and-autosavecount-settings) section for more details about the format of the `AutoSaveSmartKeep` setting and how it works together with `AutoSaveCount`.  
 
 ---
 
@@ -290,10 +292,45 @@ The default location for save files are:
 
 However, just like with the settings, this can (and should) be overridden with the `-persistentDataPath` parameter. As explained above, the saves will put in the `Saves` subfolder of whatever path is specificed by `-persistentDataPath`.
 
+## AutoSaveSmartKeep and AutoSaveCount Settings
+
+The idea with `AutoSaveSmartKeep` is to be able to save often, lets say once every minute, but not just have saves from the past `30` minutes, if `AutoSaveCount` is set to `30`. It can for instance be configured to keep `3` saves from the past `10` minutes, `1` save from the past hour, two hours, six hours, then one for the past day, with a large "bucket" at the end gathering up all the once-per-day saves.
+
+The reson to have a larger timespan of saves is it gives you more flexibility to choose a save to revert to in case you need or want to, for whatever reason. Also gives you a bit more time to react. As also mentioned below, backups are still always recommended as well.
+
+The format of the `AutoSaveSmartKeep` setting value is as follows: `A:B:C,A:B:C,A:B:C,...`
+
+It is a repeating set of values (a list) of `A`, `B`, and `C`, separated by a colon (`:`). Each of these sets are separated by a comma (`,`).
+
+Where `A`, `B`, and `C` are:  
+* `A` = Time in minutes before `now` (time of evaluation). Defining a time frame between `now` and `A` minutes ago.
+* `B` = Number of newest/latest saves falling within this time frame to keep.
+* `C` = Number of oldest saves within this time frame to keep.
+
+Example: `10:2,1`
+* Within the past `10` minutes, keep the most recent save, and the oldest save.
+
+Depending on the time between auto saves, and the time gap between entries in this setting, it is usually a good idea to always save at least `1` of the oldest in each time slot defined. So it can eventually move on to the next time slot and be evaluated there.
+
+Example: `10:2:1,60:0:1`
+* Continuing from the previous example, this one adds a time frame that keeps the oldest save from the past `1` hour as well. Note that each time frame is adjusted to not include any previous time frame, so it will technically keep one save between `10-60` minutes ago.
+
+Example: `10:2:1,60:0:1,120:0:1`
+* Again continuing from the previous example, this one adds a time frame that keeps the oldest save from the past `2` hours as well. Again, note that this is now technically the time frame between `60-120` minutes ago.
+
+### AutoSaveCount
+
+After `AutoSaveSmartKeep` has been evaluated, which happens at each Auto Save, `AutoSaveCount` is applied and the oldest saves are removed until there are no more that `AutoSaveCount` number of saves left.
+
+If you only want to use `AutoSaveCount`, set `AutoSaveSmartKeep` to an empty value, or confgure it to for exampel keep `100` of the most recent saves in the past `100` years as the only entry.
+
 ## Backups
 It is highly recommended to backup the save files often and before patching or before starting the server after having patched.
 
-The current auto save settings allows you to set save interval and save count. So with the same amount of disk space you either save often but maybe not have that many save files (not so far back in time), or save less often (longer rollback in-case of crash) and have more save files, or high number of on both and consume more disk space. So, again, regularly backing up you save files is highly recommended in case your game state becomes corrupted.
+Reasons for keeping backups of your saves includes:
+* Protect from hardware failures.
+* In case you lose your cloud server (or similar), or want to decomission it and return later.
+* In case a bug cause some corrupted save state.
 
 ## Transfer local/client save to a Dedicated Server
 The default location for save files, hosted via the game client, are:
