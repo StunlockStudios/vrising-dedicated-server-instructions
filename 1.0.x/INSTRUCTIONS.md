@@ -307,7 +307,7 @@ Where `A`, `B`, and `C` are:
 * `B` = Number of newest/latest saves falling within this time frame to keep.
 * `C` = Number of oldest saves within this time frame to keep.
 
-Example: `10:2,1`
+Example: `10:2:1`
 * Within the past `10` minutes, keep the most recent save, and the oldest save.
 
 Depending on the time between auto saves, and the time gap between entries in this setting, it is usually a good idea to always save at least `1` of the oldest in each time slot defined. So it can eventually move on to the next time slot and be evaluated there.
