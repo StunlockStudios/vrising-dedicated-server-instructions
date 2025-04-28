@@ -1,7 +1,7 @@
 # V Rising Dedicated Server Instructions for v1.0.x (PS5)
 
 > [!NOTE]
-> These instructions are for the Release (1.0) version (`1.0.x`) of the V Rising Dedicated Server for the Playstation 5 version of V Rising.  
+> These instructions are for the Current version (`1.1.x`) of the V Rising Dedicated Server for the Playstation 5 version of V Rising.  
 >
 > Links to instructions for other versions can be found in the top level [README](../README.md) file.
 
@@ -10,7 +10,7 @@ The V Rising Dedicated Server is the server application for the game [V Rising](
 # Download
 The V Rising Dedicated Server application can be downloaded from Steam, and is freely available to everyone. It can be found in the Tools section of your library. At the moment there is only a Windows version of the server available.
 
-This version of the V Rising Dedicated server can be downloaded from the `legacy-1.0.x-ce1` branch.
+This version of the V Rising Dedicated server can (currently) be downloaded from the `ce-1` branch.
 
 If you are using [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD) to download and run the server, the Steam AppID for the V Rising Dedicated Server is `1829350`. This is used for downloading the server, but when running it, it will use the same Steam AppID as the client, which is defined in the `steam_appid.txt` file supplied with the download.
 

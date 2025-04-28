@@ -1,7 +1,7 @@
-# V Rising Dedicated Server Instructions for v1.0.x (PS5)
+# V Rising Dedicated Server Instructions for v1.0.x
 
 > [!NOTE]
-> These instructions are for the Release (1.0) version (`1.0.x`) of the V Rising Dedicated Server for the Playstation 5 version of V Rising.  
+> These instructions are for the Current version (`1.1.x`) of the V Rising Dedicated Server.  
 >
 > Links to instructions for other versions can be found in the top level [README](../README.md) file.
 
@@ -10,7 +10,7 @@ The V Rising Dedicated Server is the server application for the game [V Rising](
 # Download
 The V Rising Dedicated Server application can be downloaded from Steam, and is freely available to everyone. It can be found in the Tools section of your library. At the moment there is only a Windows version of the server available.
 
-This version of the V Rising Dedicated server can be downloaded from the `legacy-1.0.x-ce1` branch.
+This version of the V Rising Dedicated server can (currently) be downloaded from the `default` branch.
 
 If you are using [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD) to download and run the server, the Steam AppID for the V Rising Dedicated Server is `1829350`. This is used for downloading the server, but when running it, it will use the same Steam AppID as the client, which is defined in the `steam_appid.txt` file supplied with the download.
 
@@ -143,11 +143,27 @@ Overrides: `VR_PASSWORD=<password>`, `-password "<password>"`
 
 ---
 
+Setting: `Secure`  
+Description: Enable VAC protection on server. VAC banned clients will not be able to connect.  
+Type: `boolean`  
+Example value: `true`, `false`  
+Overrides: `VR_SECURE=<value>`, `-secure <value>`, `-enableSecure`, `-disableSecure`  
+
+---
+
 Setting: `ListOnEOS`  
-Description: Register on EOS list server or not.  
+Description: Register on EOS list server or not. The client looks for servers here by default, due to additional features available.  
 Type: `boolean`  
 Example value: `true`, `false`  
 Overrides: `VR_LIST_ON_EOS=<value>`, `-listOnEOS <value>`  
+
+---
+
+Setting: `ListOnSteam`  
+Description: Register on Steam list server or not.  
+Type: `boolean`  
+Example value: `true`, `false`  
+Overrides: `VR_LIST_ON_STEAM=<value>`, `-listOnSteam <value>`  
 
 ---
 
@@ -265,6 +281,11 @@ Overrides: `VR_RCON_BIND_ADDRESS="<address>"`, `-rconBindAddress "<address>"`
 If you want others to connect to your server, make sure you allow the program through the firewall. You might also need to forward ports on your router. To do this, please follow your manufacturer's instructions for your particular router.
 If you want your server to show up on the server list you need to make sure that both the specified queryPort and gamePort is open in your firewall and forwarded on your router, otherwise just opening/forwarding the gamePort will be enough.
 
+## Server Administration
+To become an administrator in the game you will first need to modify the `adminlist.txt` file in the `<PersistentDataPath>/Settings/` folder with your steamId (one steamId per line). This can be done without restarting your server. To become an administrator in the game you need to enable the console in the options menu, bring it down with `~` and authenticate using the `adminauth` console command. Once an administrator you can use a number of administrative commands like `banuser`, `bancharacter`, `banned`, `unban` and `kick`.
+
+If you ban users through the in-game console the server will automatically modify the `banlist.txt` located under `<PersistentDataPath>/Settings/` but you can also modify this manually (one steamId per line).
+
 # Save Files
 The default location for save files are:
 * Windows: `%USERPROFILE%\AppData\LocalLow\Stunlock Studios\VRisingServer\Saves`
@@ -272,6 +293,7 @@ The default location for save files are:
 However, just like with the settings, this can (and should) be overridden with the `-persistentDataPath` parameter. As explained above, the saves will put in the `Saves` subfolder of whatever path is specificed by `-persistentDataPath`.
 
 ## AutoSaveSmartKeep and AutoSaveCount Settings
+
 The idea with `AutoSaveSmartKeep` is to be able to save often, lets say once every minute, but not just have saves from the past `30` minutes, if `AutoSaveCount` is set to `30`. It can for instance be configured to keep `3` saves from the past `10` minutes, `1` save from the past hour, two hours, six hours, then one for the past day, with a large "bucket" at the end gathering up all the once-per-day saves.
 
 The reson to have a larger timespan of saves is it gives you more flexibility to choose a save to revert to in case you need or want to, for whatever reason. Also gives you a bit more time to react. As also mentioned below, backups are still always recommended as well.
@@ -297,6 +319,7 @@ Example: `10:2:1,60:0:1,120:0:1`
 * Again continuing from the previous example, this one adds a time frame that keeps the oldest save from the past `2` hours as well. Again, note that this is now technically the time frame between `60-120` minutes ago.
 
 ### AutoSaveCount
+
 After `AutoSaveSmartKeep` has been evaluated, which happens at each Auto Save, `AutoSaveCount` is applied and the oldest saves are removed until there are no more that `AutoSaveCount` number of saves left.
 
 If you only want to use `AutoSaveCount`, set `AutoSaveSmartKeep` to an empty value, or confgure it to for exampel keep `100` of the most recent saves in the past `100` years as the only entry.
@@ -308,6 +331,37 @@ Reasons for keeping backups of your saves includes:
 * Protect from hardware failures.
 * In case you lose your cloud server (or similar), or want to decomission it and return later.
 * In case a bug cause some corrupted save state.
+
+## Transfer local/client save to a Dedicated Server
+The default location for save files, hosted via the game client, are:
+* Windows: `%USERPROFILE%\AppData\LocalLow\Stunlock Studios\VRising\CloudSaves\<SteamID>\`, or `%USERPROFILE%\AppData\LocalLow\Stunlock Studios\VRising\Saves\`
+
+In this folder, running this version of the server, there should be a `v3` folder, which represents the current `Persistence Version`. This number changes whenever there are  breaking changes to the persistence/save format.
+
+Inside this (currently `v3`) folder lies the actual save files for the local saves/sessions. Since the user does not name these session/save folders when starting/hosting a game via the game client, these folder names are random, in the GUID format. For example: `db4b1c0e-2b7d-430a-87ef-4b6c09398dcf`
+
+Full path example:
+```
+%USERPROFILE%\AppData\LocalLow\Stunlock Studios\VRising\CloudSaves\<SteamID>\v3\db4b1c0e-2b7d-430a-87ef-4b6c09398dcf
+
+AutoSave_0.save.gz
+AutoSave_1.save.gz
+AutoSave_2.save.gz
+ServerGameSettings.json
+ServerHostSettings.json
+SessionId.json
+StartDate.json
+```
+
+To find the specific session you want to move, find the save entry in the in-game `Load Game` menu and select `Go to Directory` and the directory will be opened up in a File Explorer window.
+
+When you have located the session you want to transfer to a dedicated server it is recommended to backup the full folder in case something goes wrong with the transfer on first try, so you allways have the original still.
+
+Now when you have backed up the original, you can do a bit of cleaning up in this folder. If you have already set up your server with name, max players, password, et cetera, or supply them on the command line, then you can remove the `ServerHostSettings.json`. You can also remove all except the last `AutoSave_#` folder, since that is the one that will be loaded, but transferring them all is fine too. Rename the "GUID folder" to something simpler if you want to, then transfer it to the `<PersistentDataPath>/Saves/v3/` folder for your server session.
+
+Configure the server to load the transferred save with the `-saveName <name>` command line parameter. Specify the moved folder as the save name to use. Also make sure to set `GameSettingsPreset` to be empty, so it does not load some other preset instead of the settings you have copied. Make sure to not have a modified `ServerGameSettings.json` in the default settings folder (should not be modified, as mentioned above) or any override `ServerGameSettings.json` in the local override folder, to achieve the same end result of game settings as they were when hosted via the client.
+
+Lastly, it is recommended to remove the files moved/copied to the server from their original client location, so the same save/session does not show up twice when you have played on the server save. You can remove the local save game via the in-game interface in the `Load Game` menu. When using Cloud Saves, it is important to do it from within the game (or when the game is running) otherwise the Cloud Sync feature will restore the files when you start the game the next time.
 
  # RCON
 Altough currently with limited functionality, you can configure the server to listen to RCON connections. If you are not familiar with RCON you can read more about it here: https://developer.valvesoftware.com/wiki/Source_RCON_Protocol.
