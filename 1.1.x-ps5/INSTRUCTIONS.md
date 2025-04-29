@@ -230,7 +230,7 @@ Overrides: `VR_DAY_OF_RESET=<value>`, `-dayOfReset <value>`
 ---
 
 Setting: `SafeReconnectTime`  
-Description: Time in `seconds` to keep `Reconnect Slots` for a recently disconnected players.  
+Description: Time in `seconds` to keep `Reconnect Slots` for recently disconnected players.  
 Type: `number`  
 Example value: `300`  
 Overrides: `VR_SAFERECONNECTTIME=<value>`, `VR_SAFE_RECONNECT_TIME=<value>`, `-safeReconnectTime <value>`  
