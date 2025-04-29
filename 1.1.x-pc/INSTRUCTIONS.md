@@ -352,13 +352,13 @@ Reasons for keeping backups of your saves includes:
 The default location for save files, hosted via the game client, are:
 * Windows: `%USERPROFILE%\AppData\LocalLow\Stunlock Studios\VRising\CloudSaves\<SteamID>\`, or `%USERPROFILE%\AppData\LocalLow\Stunlock Studios\VRising\Saves\`
 
-In this folder, running this version of the server, there should be a `v3` folder, which represents the current `Persistence Version`. This number changes whenever there are  breaking changes to the persistence/save format.
+In this folder, running this version of the server, there should be a `v4` folder, which represents the current `Persistence Version`. This number changes whenever there are  breaking changes to the persistence/save format.
 
-Inside this (currently `v3`) folder lies the actual save files for the local saves/sessions. Since the user does not name these session/save folders when starting/hosting a game via the game client, these folder names are random, in the GUID format. For example: `db4b1c0e-2b7d-430a-87ef-4b6c09398dcf`
+Inside this (currently `v4`) folder lies the actual save files for the local saves/sessions. Since the user does not name these session/save folders when starting/hosting a game via the game client, these folder names are random, in the GUID format. For example: `db4b1c0e-2b7d-430a-87ef-4b6c09398dcf`
 
 Full path example:
 ```
-%USERPROFILE%\AppData\LocalLow\Stunlock Studios\VRising\CloudSaves\<SteamID>\v3\db4b1c0e-2b7d-430a-87ef-4b6c09398dcf
+%USERPROFILE%\AppData\LocalLow\Stunlock Studios\VRising\CloudSaves\<SteamID>\v4\db4b1c0e-2b7d-430a-87ef-4b6c09398dcf
 
 AutoSave_0.save.gz
 AutoSave_1.save.gz
@@ -373,7 +373,7 @@ To find the specific session you want to move, find the save entry in the in-gam
 
 When you have located the session you want to transfer to a dedicated server it is recommended to backup the full folder in case something goes wrong with the transfer on first try, so you allways have the original still.
 
-Now when you have backed up the original, you can do a bit of cleaning up in this folder. If you have already set up your server with name, max players, password, et cetera, or supply them on the command line, then you can remove the `ServerHostSettings.json`. You can also remove all except the last `AutoSave_#` folder, since that is the one that will be loaded, but transferring them all is fine too. Rename the "GUID folder" to something simpler if you want to, then transfer it to the `<PersistentDataPath>/Saves/v3/` folder for your server session.
+Now when you have backed up the original, you can do a bit of cleaning up in this folder. If you have already set up your server with name, max players, password, et cetera, or supply them on the command line, then you can remove the `ServerHostSettings.json`. You can also remove all except the last `AutoSave_#` folder, since that is the one that will be loaded, but transferring them all is fine too. Rename the "GUID folder" to something simpler if you want to, then transfer it to the `<PersistentDataPath>/Saves/v4/` folder for your server session.
 
 Configure the server to load the transferred save with the `-saveName <name>` command line parameter. Specify the moved folder as the save name to use. Also make sure to set `GameSettingsPreset` to be empty, so it does not load some other preset instead of the settings you have copied. Make sure to not have a modified `ServerGameSettings.json` in the default settings folder (should not be modified, as mentioned above) or any override `ServerGameSettings.json` in the local override folder, to achieve the same end result of game settings as they were when hosted via the client.
 
