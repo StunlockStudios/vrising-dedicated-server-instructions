@@ -229,6 +229,22 @@ Overrides: `VR_DAY_OF_RESET=<value>`, `-dayOfReset <value>`
 
 ---
 
+Setting: `SafeReconnectTime`  
+Description: Time in `seconds` to keep `Reconnect Slots` for a recently disconnected players.  
+Type: `number`  
+Example value: `300`  
+Overrides: `VR_SAFERECONNECTTIME=<value>`, `VR_SAFE_RECONNECT_TIME=<value>`, `-safeReconnectTime <value>`  
+
+---
+
+Setting: `SafeReconnectSlots`  
+Description: Number of `Reconnect Slots` to keep for recently disconnected players. A `Reconnect Slot` allows a player to connect again without risking the server filling up before doing so.  
+Type: `number`  
+Example value: `10`  
+Overrides: `VR_SAFERECONNECTSLOTS=<value>`, `VR_SAFE_RECONNECT_SLOTS=<value>`, `-safeReconnectSlots <value>`  
+
+---
+
 ### Rcon
 
 Setting: `Enabled`  
