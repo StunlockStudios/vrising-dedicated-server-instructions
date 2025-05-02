@@ -1,4 +1,4 @@
-# V Rising Dedicated Server Instructions for v1.0.x (PS5)
+# V Rising Dedicated Server Instructions for v1.1.x (PS5)
 
 > [!NOTE]
 > These instructions are for the Current version (`1.1.x`) of the V Rising Dedicated Server for the Playstation 5 version of V Rising.  
