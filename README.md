@@ -5,7 +5,7 @@ There is a server packaged with the client, which runs in the background when yo
 
 ## Instructions
 There are currently six (6) different versions of V Rising, and therefore also of the V Rising Dedicated Server. Follow the below link for the version you are interested in.
-* [CURRENT - 1.1.x (PC)](1.1.x/INSTRUCTIONS.md)
+* [CURRENT - 1.1.x (PC)](1.1.x-pc/INSTRUCTIONS.md)
 * [CURRENT - 1.1.x (PS5)](1.1.x-ps5/INSTRUCTIONS.md)
 * [LEGACY - 1.0.x (PC)](1.0.x/INSTRUCTIONS.md)
 * [LEGACY - 1.0.x (PS5)](1.0.x-ps5/INSTRUCTIONS.md)
