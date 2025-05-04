@@ -15,9 +15,7 @@ This version of the V Rising Dedicated server can be downloaded from the `legacy
 If you are using [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD) to download and run the server, the Steam AppID for the V Rising Dedicated Server is `1829350`. This is used for downloading the server, but when running it, it will use the same Steam AppID as the client, which is defined in the `steam_appid.txt` file supplied with the download.
 
 # Running the Server
-In its simplest form you could just execute VRisingServer.exe to start the server. This will start the server with all default settings, which is probably not what you want.
-
-There is an example batch script (`start_server_example.bat`) in the installation folder next to the executable file. It is recommended that you make a copy of this file and modify it to your liking. If you change the supplied example file it might be overwritten when the software is updated.
+There is an example batch script (`start_server_example.bat`) in the installation folder next to the executable file. It is recommended that you make a copy of this file and modify it to your liking. If you change the supplied example file it might be overwritten when the software is updated. The server configuration relies on setting the AppID in order to work properly, starting VRisingServer.exe will have the incorrect AppID configured!
 
 # Configuring the Server
 There are two main settings files that the server is using.
