@@ -1,4 +1,4 @@
-# V Rising Dedicated Server Instructions for v1.0.x
+# V Rising Dedicated Server Instructions for v1.0.x (PC)
 
 > [!NOTE]
 > These instructions are for the Release (1.0) version (`1.0.x`) of the V Rising Dedicated Server.  
