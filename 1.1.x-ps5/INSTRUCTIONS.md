@@ -14,10 +14,20 @@ This version of the V Rising Dedicated server can (currently) be downloaded from
 
 If you are using [SteamCMD](https://developer.valvesoftware.com/wiki/SteamCMD) to download and run the server, the Steam AppID for the V Rising Dedicated Server is `1829350`. This is used for downloading the server, but when running it, it will use the same Steam AppID as the client, which is defined in the `steam_appid.txt` file supplied with the download.
 
+An example script to download via SteamCMD can be found [here](./examples/download-ce-1.bat).
+
+# Updating
+Since the server software is updated from time to time to fix bugs, improve performance and balance the game, it is important to keep your server updated. Exactly how to update your deployment varies depending on how your setup looks, but if you used something like the [SteamCMD example script mentioned above](./examples/download-ce-1.bat) then it is as easy as just running the script again (when the server is offline) to verify and update to the latest version.
+
 # Running the Server
 In its simplest form you could just execute VRisingServer.exe to start the server. This will start the server with all default settings, which is probably not what you want.
 
 There is an example batch script (`start_server_example.bat`) in the installation folder next to the executable file. It is recommended that you make a copy of this file and modify it to your liking. If you change the supplied example file it might be overwritten when the software is updated.
+
+# Restarting the Server
+While the server software in many cases can run for several days without problem, you should restart the server from time to time, and we recommend doing this on a daily basis. This makes it consistent and you can do it when the server is least populated, like during the night or early morning.
+
+If you are not hosting the server yourself, but using an existing hosting company/service, most of them should have a scheduler you can setup to make sure it is restarted on a daily basis, if it is not setup by default. Some hosting services only update the server when you restart, so that is another reason to restart as well.
 
 # Configuring the Server
 There are two main settings files that the server is using.
